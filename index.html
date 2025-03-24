@@ -45,6 +45,40 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-关于-C-C-无法打开-exe进行写入-的解决办法" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2025-03-21T10:21:41.000Z"><a href="/2025/03/21/%E5%85%B3%E4%BA%8E-C-C-%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80-exe%E8%BF%9B%E8%A1%8C%E5%86%99%E5%85%A5-%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">2025-03-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2025/03/21/%E5%85%B3%E4%BA%8E-C-C-%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80-exe%E8%BF%9B%E8%A1%8C%E5%86%99%E5%85%A5-%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">关于 C/C++无法打开.exe进行写入 的解决办法</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h2 id="前言：在VS-2022上编写时，进行调试之后，经常会出现这样的错误：-无法打开-C-Users-C-ssl-x64-Debug-C-ssl-exe-进行写入-的-LNK-1168：无法打开-exe进行写入的错误-（我可是深受它的折磨啊）我查了很多的博客，有时也用，有时没用，最后算是东拼西凑的得到一个比较好用的处理方法。"><a href="#前言：在VS-2022上编写时，进行调试之后，经常会出现这样的错误：-无法打开-C-Users-C-ssl-x64-Debug-C-ssl-exe-进行写入-的-LNK-1168：无法打开-exe进行写入的错误-（我可是深受它的折磨啊）我查了很多的博客，有时也用，有时没用，最后算是东拼西凑的得到一个比较好用的处理方法。" class="headerlink" title="#####前言：在VS 2022上编写时，进行调试之后，经常会出现这样的错误：&#x2F;*&gt;无法打开 C:\Users..\C++ssl\x64\Debug\C++ssl.exe 进行写入  的 LNK 1168：无法打开.exe进行写入的错误&#x2F;（我可是深受它的折磨啊）我查了很多的博客，有时也用，有时没用，最后算是东拼西凑的得到一个比较好用的处理方法。&#x2F;"></a>#####前言：<br>在VS 2022上编写时，进行调试之后，经常会出现这样的错误：<br>&#x2F;*<br>&gt;无法打开 C:\Users..\C++ssl\x64\Debug\C++ssl.exe 进行写入  的 LNK 1168：无法打开.exe进行写入的错误<br><em>&#x2F;<br>（我可是深受它的折磨啊）<br>我查了很多的博客，有时也用，有时没用，最后算是东拼西凑的得到一个比较好用的处理方法。<br>&#x2F;</em></h2><p><em>&#x2F;<br>##方法一：<br>    按 &#x3D;&#x3D;Ctri + Shift + Esc&#x3D;&#x3D; 打开任务管理器，找到这个进程，把它关闭就行了。（原因：是因为调试之后进程没有正常关闭，手动关闭一下就好了）<br>    一劳永逸的方法：在菜单中的*<em>工具</em></em> -&gt; <strong>选项</strong> -&gt; <strong>调试</strong> -&gt; <strong>常规</strong> 里，有一项<strong>调试停止时自动关闭控制台</strong>，把它选上。<br>    <img src="/image.png" alt="alt text"><br>##方法二：（个人感觉是最有用方法）<br>    点击菜单栏上方的：<strong>生成</strong>。选择<strong>重新生成项目解决方案</strong>。然后再次执行，错误就消失。<br>##方法三：<br>    关机重启。（老话说得好，关机可以解决90%的问题，要是实在解决不了，那就关机重启吧）
+  </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
   <article id="post-Get-started-with-C" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
@@ -212,7 +246,7 @@
   <div class="widget widget-archives">
     <h3 class="title">Archives</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
