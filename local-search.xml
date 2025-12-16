@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Hello World</title>
+    <link href="/2025/12/15/hello-world/"/>
+    <url>/2025/12/15/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>欢迎使用 <a href="https://hexo.io/">Hexo</a>！这是你的第一篇文章。如需了解更多信息，请查看 <a href="https://hexo.io/docs/">官方文档</a>。如果在使用 Hexo 过程中遇到任何问题，可以在 <a href="https://hexo.io/docs/troubleshooting.html">问题排查</a> 中寻找答案，或在 <a href="https://github.com/hexojs/hexo/issues">GitHub</a> 上向我们提问。</p><span id="more"></span> <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/writing.html">写作指南</a></p><h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/server.html">服务器配置</a></p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/generating.html">静态文件生成</a></p><h3 id="部署到远程站点"><a href="#部署到远程站点" class="headerlink" title="部署到远程站点"></a>部署到远程站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/one-command-deployment.html">一键部署</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>win11电脑配置C C++的编译环境</title>
     <link href="/2025/08/06/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/"/>
     <url>/2025/08/06/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
@@ -131,19 +144,6 @@
       <tag>-教程 -Git</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2025/08/05/hello-world/"/>
-    <url>/2025/08/05/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>欢迎使用 <a href="https://hexo.io/">Hexo</a>！这是你的第一篇文章。如需了解更多信息，请查看 <a href="https://hexo.io/docs/">官方文档</a>。如果在使用 Hexo 过程中遇到任何问题，可以在 <a href="https://hexo.io/docs/troubleshooting.html">问题排查</a> 中寻找答案，或在 <a href="https://github.com/hexojs/hexo/issues">GitHub</a> 上向我们提问。</p><span id="more"></span> <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/writing.html">写作指南</a></p><h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/server.html">服务器配置</a></p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/generating.html">静态文件生成</a></p><h3 id="部署到远程站点"><a href="#部署到远程站点" class="headerlink" title="部署到远程站点"></a>部署到远程站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/one-command-deployment.html">一键部署</a></p>]]></content>
-    
-    
     
   </entry>
   
