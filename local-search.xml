@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>win11电脑配置C C++的编译环境</title>
+    <link href="/2025/08/06/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/"/>
+    <url>/2025/08/06/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="win11电脑配置C-C-的编译环境"><a href="#win11电脑配置C-C-的编译环境" class="headerlink" title="win11电脑配置C&#x2F;C++的编译环境"></a>win11电脑配置C&#x2F;C++的编译环境</h1><span id="more"></span> <p>参考链接：</p><p><a href="https://blog.csdn.net/qq_42417071/article/details/137438374">VS Code 配置 C&#x2F;C++ 编程运行环境（保姆级教程）_vscode配置c++环境-CSDN博客</a></p><p>PS：上述链接里有更详细更全面的关于VS code中配置C&#x2F;C++编译环境的教程</p><h1 id="1-下载MinGW-W64"><a href="#1-下载MinGW-W64" class="headerlink" title="1.  下载MinGW-W64"></a>1.  下载MinGW-W64</h1><p>可以选择去官网下载</p><p><a href="https://www.mingw-w64.org/source/">Source Code - mingw-w64</a></p><p>（PS：当然，官网下载可能比较慢，而且我没试过，所以不清楚流程是否一样）</p><p>百度网盘下载</p><p>Github下载</p><h1 id="2-安装MinGW-W64"><a href="#2-安装MinGW-W64" class="headerlink" title="2.安装MinGW-W64"></a>2.安装MinGW-W64</h1><p>双击打开 msys2-x86_64-20250221.exe 文件</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage.png" alt="安装步骤截图"></p><p>之后全部选择默认安装即可</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage1.png" alt="image.png"></p><p>这里安装路径如果要更改的话，请一定要记住安装路径，之后要用到的</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage2.png" alt="image.png"></p><p>选择“下一步”</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage3.png" alt="image.png"></p><p>等待安装完成即可（PS：进度条可能会长时间停留在50%，这是正常现象，继续等待即可）</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage4.png" alt="image.png"></p><p>选择“下一步”</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage5.png" alt="image.png"></p><p>如果没有自动勾选”立即运行MSYS2“，自己勾选上，然后点击”完成“</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage6.png" alt="image.png"></p><p>点击完成之后，等待一下，就会出现这个命令框</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage7.png" alt="image.png"></p><p>然后在命令框中输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain<br></code></pre></td></tr></table></figure><p>PS：     S是大写         devel是英文，l可能会应为字体原因被认为是数字1</p><p>这里直接点击回车键即可</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage8.png" alt="image.png"></p><p>输入”Y”，点击回车</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage9.png" alt="image.png"></p><p>静静等待即可</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage10.png" alt="image.png"></p><p>安装完成之后，关闭窗口</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage11.png" alt="image.png"></p><p>打开安装MSYS2的目录,之后  <code>ucrt64  —&gt;  bin</code> ，进入到bin文件夹中之后，复制路径</p><p>如果，一开始是选择的默认安装路径，那路径就是<code>C:\msys64\ucrt64\bin</code>。</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage12.png" alt="image.png"></p><h1 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3. 配置环境变量"></a>3. 配置环境变量</h1><p>之后在“开始”菜单中搜素“编辑系统环境变量”，然后打开</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage13.png" alt="image.png"></p><p>在“系统属性”界面点击“环境变量”</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage14.png" alt="image.png"></p><p>在“环境变量”界面双击“Path”</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage15.png" alt="image.png"></p><p>在”编辑环境变量“界面选择”新建“，之后会在中间空白部分有一个可填写的区域，在区域中粘贴上刚刚复制的路径，之后点击”确定“</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage16.png" alt="image.png"></p><p>之后一路点击”确定“返回即可</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage17.png" alt="image.png"></p><h1 id="验证是否配置成功"><a href="#验证是否配置成功" class="headerlink" title="验证是否配置成功"></a>验证是否配置成功</h1><p><code>win+R</code> 输入<code>cmd</code> 点击回车打开命令提示符</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage18.png" alt="image.png"></p><p>之后依次输入以下内容并回车</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc --version<br><br>g++ --version<br><br>gdb --version<br></code></pre></td></tr></table></figure><p>如果出现以下内容就是配置成功了</p><p><img src="/%5Cimg%5Cwin11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%5Cimage19.png" alt="image.png"></p><p>来，给自己“呱唧呱唧”。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-windows -C/C++ -配置编译环境</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>小工具/教程</title>
+    <link href="/2025/08/06/%E5%B0%8F%E5%B7%A5%E5%85%B7-%E6%95%99%E7%A8%8B/"/>
+    <url>/2025/08/06/%E5%B0%8F%E5%B7%A5%E5%85%B7-%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="小工具-教程"><a href="#小工具-教程" class="headerlink" title="小工具&#x2F;教程#"></a>小工具&#x2F;教程#</h1><span id="more"></span> <p>这算是一个合集，主要是我在学习和工作中了解到的一些知识，比较琐碎，本想的是我自己总结一下，加深记忆而且方便之后学习和使用，但是感觉有点太麻烦了，所以干脆保留这些网址，之后再使用时直接访问，而且还可以在添加一些自己遇到的一些教程中没有提到的东西</p><hr><h1 id="VSCode中安装Live-Server插件实现Html网页代码的实时预览"><a href="#VSCode中安装Live-Server插件实现Html网页代码的实时预览" class="headerlink" title="VSCode中安装Live Server插件实现Html网页代码的实时预览"></a>VSCode中安装Live Server插件实现Html网页代码的实时预览</h1><p><a href="https://blog.csdn.net/m0_46772594/article/details/113485804">VSCode中安装Live Server插件实现Html网页代码的实时预览_vsc html插件 实时展示-CSDN博客</a> </p><p>PS：想要插件起作用需要将文件导入到VS Code中，仅仅是使用VS Code打开html文件，插件是没办法起作用的</p><hr><h1 id="关于HTML引入CSS文件后没有效果"><a href="#关于HTML引入CSS文件后没有效果" class="headerlink" title="关于HTML引入CSS文件后没有效果#"></a>关于HTML引入CSS文件后没有效果#</h1><p>这个问题我想应该是大多数人初次学习前端时经常遇到的问题了，这里整理了一些我遇到的情况</p><h2 id="1-路径问题"><a href="#1-路径问题" class="headerlink" title="1. 路径问题##"></a>1. 路径问题##</h2><link>标签的href属性的路径有问题，一般情况下建议使用相对路径，写的时候方便，看的时候易懂，一般情况下移动文件不用修改路径。<p>还有当HTML文件在HTML文件夹内时（PS：假定CSS文件夹与HTML文件夹是同一层），填写相对路径时要先返回上一路径</p><h2 id="2-type属性问题"><a href="#2-type属性问题" class="headerlink" title="2. type属性问题##"></a>2. type属性问题##</h2><link>标签可以有type属性，但是type应该写成rel <p>如果我要表达不清楚的地方，请移步以下网址：</p><p><a href="https://blog.csdn.net/qq_57408330/article/details/128978102">关于html引入css文件后没有效果问题_link引入css不起作用-CSDN博客</a> </p><hr><h1 id="Sublime-Text运行C和C-程序"><a href="#Sublime-Text运行C和C-程序" class="headerlink" title="Sublime Text运行C和C++程序#"></a>Sublime Text运行C和C++程序#</h1><p>要想Sublime Text可以运行C&#x2F;C++程序，电脑上要有C&#x2F;C++的解释器，</p><p>检查是否有C&#x2F;C++解释器，在终端中输入以下命令</p><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">gcc</span> <span class="hljs-literal">--</span><span class="hljs-comment">version</span><br><span class="hljs-comment">g</span><span class="hljs-literal">++</span> <span class="hljs-literal">--</span><span class="hljs-comment">version</span><br><span class="hljs-comment">gdb</span> <span class="hljs-literal">--</span><span class="hljs-comment">version</span><br></code></pre></td></tr></table></figure><p>输入后得到以下的输出说明解释器已经配置好了</p><p><img src="/img/%E5%B0%8F%E5%B7%A5%E5%85%B7-%E6%95%99%E7%A8%8B/png1.png" alt="png1.png"></p><p>如果，没有解释器，可以参考这篇博客添加解释器</p><p><a href="http://localhost:4000/2025/08/06/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC%20C++%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/">win11电脑配置C C++的编译环境 | KTDF</a> </p><p>之后的操作参考这篇博客：</p><p><a href="https://www.cnblogs.com/chuqianyu/p/15792207.html">Sublime Text运行C和C++程序 - 楚千羽 - 博客园</a> </p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>·教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>windows和Office激活教程</title>
+    <link href="/2025/08/05/windows%E5%92%8COffice%E6%BF%80%E6%B4%BB%E6%95%99%E7%A8%8B/"/>
+    <url>/2025/08/05/windows%E5%92%8COffice%E6%BF%80%E6%B4%BB%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<p>windows和Office激活教程</p><span id="more"></span><ol><li><p><strong>打开 PowerShell</strong><br>请按 Windows 键 + X，然后选择 PowerShell 或终端。</p></li><li><p><strong>手动输入下面的代码，然后按 Enter。</strong><br>PS：复制并粘贴可能无法使用</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">irm</span> https://get.activated.win | <span class="hljs-built_in">iex</span><br></code></pre></td></tr></table></figure></li><li><p><strong>选择激活项目</strong></p><p>您将看到激活选项。选择以绿色突出显示的激活选项，输入要激活的项目序号，之后按照要求操作即可。</p></li><li><p><strong>激活完成</strong><br>good</p></li><li><p><strong>若以上方法无效，请移步以下网址</strong><br><a href="https://github.com/massgravel/Microsoft-Activation-Scripts">https://github.com/massgravel/Microsoft-Activation-Scripts</a></p></li></ol><p><strong><a href="https://github.com/massgravel/Microsoft-Activation-Scripts">参考资料</a></strong></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-Windows激活 -office激活</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>VS code设置自动保存教程</title>
+    <link href="/2025/08/05/VS-code%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E6%95%99%E7%A8%8B/"/>
+    <url>/2025/08/05/VS-code%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="VS-code中设置自动保存教程"><a href="#VS-code中设置自动保存教程" class="headerlink" title="VS code中设置自动保存教程"></a>VS code中设置自动保存教程</h1><span id="more"></span> <ol><li><h3 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h3><p>打开<strong>VS code</strong> 。</p></li><li><h3 id="然后进行以下操作"><a href="#然后进行以下操作" class="headerlink" title="然后进行以下操作"></a>然后进行以下操作</h3><p>点击“<strong>文件</strong>”–&gt; 选择“<strong>首选项</strong>”–&gt;点击“<strong>设置</strong>”–&gt; 输入“<strong>after delay</strong>” –&gt; 将Auto Save项目设置成“<strong>after delay</strong>”。</p><p>如果在Auto Save项目的上下有关于<em>自动保存的选项</em>也一并<strong>勾选</strong></p></li><li><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>关闭设置窗口即可。</p></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-VS code -教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Sublime Text汉化教程</title>
+    <link href="/2025/08/05/Sublime-Text%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/"/>
+    <url>/2025/08/05/Sublime-Text%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="将Sublime-Text汉化"><a href="#将Sublime-Text汉化" class="headerlink" title="将Sublime Text汉化"></a>将Sublime Text汉化</h1><span id="more"></span> <p>要将Sublime Text设置为中文，可以按照以下步骤进行：</p><ol><li><strong>打开Sublime Text</strong>：启动Sublime Text应用程序。</li><li><strong>打开命令面板</strong>：使用快捷键 <code>Shift + Ctrl + P</code> 打开命令面板 。</li><li><strong>安装Package Control插件</strong>：在命令面板中输入 <code>Install Package Control</code> 并按回车键。如果是第一次安装，会弹出确认框，点击确定即可 。</li><li><strong>安装中文语言包</strong>：再次打开命令面板（<code>Shift + Ctrl + P</code>）。输入 <code>Package Control: Install Package</code> 并按回车键。在弹出的搜索框中输入 <code>ChineseLocalizations</code>，选择并安装 。</li><li><strong>设置语言为简体中文</strong>：安装完成后，重启Sublime Text。点击菜单栏中的 <code>Help -&gt; Language -&gt; 简体中文</code> 。</li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-Sublime Text -教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Sublime Text安装emmet</title>
+    <link href="/2025/08/05/Sublime-Text%E5%AE%89%E8%A3%85emmet/"/>
+    <url>/2025/08/05/Sublime-Text%E5%AE%89%E8%A3%85emmet/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Sublime-Text安装emmet"><a href="#Sublime-Text安装emmet" class="headerlink" title="Sublime Text安装emmet"></a>Sublime Text安装emmet</h1><span id="more"></span> <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Emmet是一款Web前端开发工具Sublime的插件，使用仿CSS选择器的语法来生成代码，提高了HTML和CSS代码编写的速度。只需按住Tab键即可把一个简写展开成HTML和CSS的代码块，大部分标签都可自动生成。 </p><ol><li>首先安装Package Control插件管理系统<ol><li><strong>打开Sublime Text</strong>：启动Sublime Text应用程序。</li><li><strong>打开命令面板</strong>：使用快捷键 <code>Shift + Ctrl + P</code> 打开命令面板 。</li><li><strong>安装Package Control插件</strong>：在命令面板中输入 <code>Install Package Control</code> 并按回车键。如果是第一次安装，会弹出确认框，点击确定即可 。</li></ol></li><li>安装emmet插件<ol><li><strong>打开命令面板</strong>：重启后，按住快捷键Ctrl+Shift+P或者在菜单栏选择Perferences–&gt;Package Control即可打开命令面板，如若没有反应稍等一下便会弹出 </li><li><strong>打开package</strong>：在命令面板找到package control install package，或者在命令面板输入”pcip”即这四个单词的首字母 </li><li><strong>安装emmet插件</strong>：在package的面板中搜索emmet找到后点击回车键，稍后便会自动安装。</li></ol></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-Sublime Text -教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Git操作教程</title>
+    <link href="/2025/08/05/Git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/"/>
+    <url>/2025/08/05/Git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Git-基础操作手册"><a href="#Git-基础操作手册" class="headerlink" title="Git 基础操作手册#"></a>Git 基础操作手册#</h1><span id="more"></span> <p>PS:（目前仅有在本地使用Git的教程，2025.08.05）</p><h3 id="一、初始化仓库"><a href="#一、初始化仓库" class="headerlink" title="一、初始化仓库"></a><strong>一、初始化仓库</strong></h3><p>在项目目录中使用命令 <code>git init</code> 初始化 Git 仓库，会创建名为 .git 的隐藏目录，存放仓库必要文件。</p><h3 id="二、检查文件状态"><a href="#二、检查文件状态" class="headerlink" title="二、检查文件状态"></a><strong>二、检查文件状态</strong></h3><p>使用 <code>git status</code> 命令，可查看当前目录中未跟踪、已修改和已暂存的文件状态。</p><h3 id="三、跟踪新文件"><a href="#三、跟踪新文件" class="headerlink" title="三、跟踪新文件"></a><strong>三、跟踪新文件</strong></h3><ul><li>跟踪单个文件：如跟踪 index.html，执行 <code>git add index.html</code>。</li><li>批量跟踪：用通配符 *，执行 <code>git add *.*</code> 。</li></ul><p>跟踪后再运行 <code>git status</code> 可查看文件处于暂存状态。</p><h3 id="四、提交更新"><a href="#四、提交更新" class="headerlink" title="四、提交更新"></a><strong>四、提交更新</strong></h3><p>使用 <code>git commit -m &quot;提交信息&quot;</code> 命令，将暂存区文件提交到 Git 仓库，-m 后为描述本次提交内容的信息。</p><h3 id="五、修改已提交文件"><a href="#五、修改已提交文件" class="headerlink" title="五、修改已提交文件"></a><strong>五、修改已提交文件</strong></h3><p>修改文件后，先 <code>git add &lt;文件名&gt;</code> 暂存修改，再 <code>git commit -m &quot;修改说明&quot;</code> 提交。</p><h3 id="六、跳过暂存区"><a href="#六、跳过暂存区" class="headerlink" title="六、跳过暂存区"></a><strong>六、跳过暂存区</strong></h3><p>对于已跟踪文件，使用 <code>git commit -a -m &quot;提交信息&quot;</code> 可直接提交，跳过暂存步骤。</p><h3 id="七、移除文件"><a href="#七、移除文件" class="headerlink" title="七、移除文件"></a><strong>七、移除文件</strong></h3><ul><li>从 Git 仓库和工作区同时移除：<code>git rm -f &lt;文件名&gt;</code> ，如 git rm -f index.js 。</li><li>仅从 Git 仓库移除，保留工作区：<code>git rm --cached &lt;文件名&gt;</code> ，如 git rm –cached index.css 。</li></ul><h3 id="八、忽略文件"><a href="#八、忽略文件" class="headerlink" title="八、忽略文件"></a><strong>八、忽略文件</strong></h3><p>创建 .gitignore 文件，按匹配模式列出要忽略的文件或目录，如：</p><ul><li>.log ：忽略所有 .log 文件</li><li><code>node_modules/</code> ：忽略 node_modules 目录</li></ul><h3 id="九、回退到指定版本"><a href="#九、回退到指定版本" class="headerlink" title="九、回退到指定版本"></a><strong>九、回退到指定版本</strong></h3><ul><li>用 <code>git log --pretty=oneline</code> 查看提交历史。</li><li>用 <code>git reset --hard &lt;commitID&gt;</code> 回退到指定版本 。</li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-教程 -Git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2025/08/05/hello-world/"/>
+    <url>/2025/08/05/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>欢迎使用 <a href="https://hexo.io/">Hexo</a>！这是你的第一篇文章。如需了解更多信息，请查看 <a href="https://hexo.io/docs/">官方文档</a>。如果在使用 Hexo 过程中遇到任何问题，可以在 <a href="https://hexo.io/docs/troubleshooting.html">问题排查</a> 中寻找答案，或在 <a href="https://github.com/hexojs/hexo/issues">GitHub</a> 上向我们提问。</p><span id="more"></span> <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/writing.html">写作指南</a></p><h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/server.html">服务器配置</a></p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/generating.html">静态文件生成</a></p><h3 id="部署到远程站点"><a href="#部署到远程站点" class="headerlink" title="部署到远程站点"></a>部署到远程站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/one-command-deployment.html">一键部署</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
