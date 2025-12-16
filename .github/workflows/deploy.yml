@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages & Aliyun OSS
+
+on:
+  push:
+    branches: [ main ] # 当代码推送到main分支时触发。如果您的主分支叫master，请改为[ master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 步骤1: 拉取代码
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive # 如果主题是git子模块，这个选项很重要
+
+      # 步骤2: 安装Node.js环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # 推荐使用Node.js LTS版本，如18.x
+
+      # 步骤3: 安装Hexo及项目依赖
+      - name: Install Dependencies
+        run: |
+          npm install -g hexo-cli
+          npm install
+
+      # 步骤4: 生成静态网站文件
+      - name: Generate Site
+        run: hexo clean && hexo g
+
+      # 步骤5: 部署到 GitHub Pages (使用您的SSH密钥方式)
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }} # 这是使用SSH部署的方式，需要您预先配置。如果您之前用token，可改为 personal_token
+          publish_dir: ./public
+          publish_branch: gh-pages # 将静态文件发布到 gh-pages 分支
+
+      # 步骤6: 同步到阿里云OSS (使用官方ossutil工具)
+      - name: Setup Aliyun OSS Util
+        run: |
+          wget http://gosspublic.alicdn.com/ossutil/1.7.19/ossutil64 -O ossutil64
+          chmod +x ossutil64
+          ./ossutil64 config -e ${{ secrets.OSS_ENDPOINT }} -i ${{ secrets.OSS_ACCESS_KEY_ID }} -k ${{ secrets.OSS_ACCESS_KEY_SECRET }} -L CH
+        env:
+          OSS_ENDPOINT: 'oss-cn-hangzhou-internal.aliyuncs.com' # 请在此处直接填入您的Endpoint，例如 oss-cn-shanghai.aliyuncs.com
+
+      - name: Upload to OSS
+        run: ./ossutil64 cp -r -f --meta Cache-Control:no-cache ./public/ oss://ktdf-blog/ # 请替换“您的Bucket名称”

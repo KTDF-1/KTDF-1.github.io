@@ -40,7 +40,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true 
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
@@ -101,4 +101,7 @@ theme: fluid
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: git@github.com:KTDF-1/KTDF-1.github.io.git  # 仓库SSH地址
+  branch: main  # GitHub Pages默认分支
+  force: true  # 关键：开启强制推送，覆盖远程仓库所有内容
