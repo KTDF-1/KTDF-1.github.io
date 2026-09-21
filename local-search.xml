@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>RSA算法详解</title>
+    <link href="/2025/12/28/RSA%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/"/>
+    <url>/2025/12/28/RSA%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="RSA算法详解"><a href="#RSA算法详解" class="headerlink" title="RSA算法详解"></a>RSA算法详解</h1><p>参考资料</p><p><a href="https://harlanhu.com/posts/explore/algorithm/rsa-algorithm/">RSA 算法详解 · Harlan’s Cyberspace</a> </p><p><a href="https://blog.csdn.net/paycho/article/details/131050459?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-131050459-blog-130738368.235%5Ev43%5Epc_blog_bottom_relevance_base9&spm=1001.2101.3001.4242.1&utm_relevant_index=2">RSA加密算法解析_rsa-d加密算法-CSDN博客</a> </p><h2 id="RSA-算法简介"><a href="#RSA-算法简介" class="headerlink" title="RSA 算法简介"></a>RSA 算法简介</h2><p>RSA 算法是一种非对称加密算法，由 Ron Rivest、Adi Shamir 和 Leonard Adleman 于 1977 年提出。它是现代密码学的基石之一，广泛应用于数据加密、数字签名、密钥交换等领域。 RSA 算法的核心思想是基于大整数的质因数分解难题。它利用一对密钥（公钥和私钥）进行加密和解密操作，公钥用于加密数据，私钥用于解密数据。由于 RSA 算法的安全性和通用性，它成为了许多安全协议（如 SSL&#x2F;TLS、SSH、PGP 等）的基础。</p><hr><h2 id="RSA-算法的历史背景"><a href="#RSA-算法的历史背景" class="headerlink" title="RSA 算法的历史背景"></a>RSA 算法的历史背景</h2><p>RSA 算法的发明标志着公钥密码学的诞生。在 RSA 算法之前，密码学主要依赖于对称加密算法，即加密和解密使用相同的密钥。对称加密算法的缺点是密钥分发困难，通信双方需要安全地共享密钥。 1976 年，Whitfield Diffie 和 Martin Hellman 提出了公钥密码学的概念，但未给出具体实现。1977 年，Rivest、Shamir 和 Adleman 提出了 RSA 算法，首次实现了公钥加密和数字签名。RSA 算法的发明对密码学领域产生了深远的影响，推动了现代信息安全技术的发展。</p><hr><h2 id="RSA-算法的数学基础"><a href="#RSA-算法的数学基础" class="headerlink" title="RSA 算法的数学基础"></a>RSA 算法的数学基础</h2><p>RSA 算法的安全性依赖于数论中的一些重要概念和定理，主要包括：</p><h3 id="质数与互质"><a href="#质数与互质" class="headerlink" title="质数与互质"></a>质数与互质</h3><ul><li><strong>质数</strong>：大于 1 的自然数，除了 1 和它本身外，不能被其他自然数整除。</li><li><strong>互质</strong>：两个整数的最大公约数为 1，或者说没有初1以外的公因数，称为互质。</li></ul><h3 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h3><p>欧拉函数 ϕ(n) 表示小于或等于 n 的正整数中与 n 互质的数的个数。<br>对于质数 p，有这样的性质：$ \phi(p)&#x3D;p−1 $<br>对于两个不同的质数 p 和 q，有：$ \phi(p×q) &#x3D; (p−1) × (q−1) $</p><h3 id="模运算"><a href="#模运算" class="headerlink" title="模运算"></a>模运算</h3><p>模运算是指求一个数除以另一个数的余数，就是简单的求余数。RSA 算法中大量使用了模运算的性质，例如：</p><p>$ ( a × b ) \mod n &#x3D; [( a\mod n ) × (b \mod n)] \mod n $</p><p>$ a^b \mod n $ 可以通过快速幂算法高效计算，快速幂算法可将指数运算的时间复杂度从O(b)降至O(logb)，避免大指数计算的效率问题。</p><p>之后你可能会遇到以下的表达式，这里做一下说明：</p><p>$ a ≡ 1 (\mod n) $ 表示整数 a 和 1 在模 n 的情况下等价，≡ 是同余符号</p><p>$ a ≡ 1 \mod n $ 这是数学同余的简写形式，与 $ a ≡ 1 \pmod{n} $ 的含义完全一致</p><h3 id="模逆元"><a href="#模逆元" class="headerlink" title="模逆元"></a>模逆元</h3><p>如果两个正整数a和n互质，那么一定可以找到整数b，使得 ab-1被n整除，或者说ab被n除的余数是1。这时，b就叫做a的“<strong>模逆元</strong>”（也叫乘法逆元，模反元素）。</p><p>$ a·b≡1(\mod n) $</p><p>例： a&#x3D;3,n&#x3D;4</p><p>(3b-1)%4&#x3D;0 ；3b&#x3D; 4k +1 ；(k≥1为任意整数)</p><p>得到一个特解 $b&#x3D;3$，其余解 $b&#x3D;7,11,-1,\dots$</p><blockquote><p>模逆元不是唯一的：若 $b_0$ 是一组特解，则全部通解为：<br>$$b &#x3D; b_0 + k\cdot n,\quad k\in\mathbb Z$$</p></blockquote><p>当 $a$ 与 $n$ 互质时，根据欧拉定理：<br>$$a^{\varphi(n)} \equiv 1 \pmod{n}$$<br>变形得到 $a$ 在模 $n$ 下的模逆元：<br>$$b &#x3D; a^{\varphi(n)-1}$$</p><blockquote><p>补充：若模数 $n$ 为质数，$\varphi(n)&#x3D;n-1$，退化为费马小定理，逆元为 $a^{n-2}$。<br>逆元存在前提：$\boldsymbol{\gcd(a,n)&#x3D;1}$，a与模数n互质；不互质则不存在乘法逆元。</p></blockquote><h3 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h3><p>欧拉定理指出，如果两个正整数 a 和 n 互质，则：</p><p>$ a ^{\phi(n)} ≡ 1 \mod n $</p><p> 欧拉定理是 RSA 算法的核心数学基础。</p><h3 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理 "></a><font style="color:rgb(31, 35, 41);">费马小定理 </font></h3><p><font style="color:rgb(31, 35, 41);">费马小定理是欧拉定理的</font><strong><font style="color:rgb(31, 35, 41);">特殊情况</font></strong><font style="color:rgb(31, 35, 41);">，适用条件更具体：</font></p><p><font style="color:rgb(31, 35, 41);"> 若a是正整数，p 是质数，且a 与p 互质（即a 不是 p 的倍数），则：</font></p><p>$  a^{p-1} \equiv 1 \pmod{p}  $</p><p><strong><font style="color:rgb(31, 35, 41);">例</font></strong><font style="color:rgb(31, 35, 41);">：取a&#x3D;2 , p&#x3D;5 （5是质数，且2与5互质） </font></p><p><font style="color:rgb(31, 35, 41);">计算：</font>$ ( 2^{5-1}&#x3D;2^4&#x3D;16 ) $<font style="color:rgb(31, 35, 41);">，</font>$ ( 16 \div 5 ) $<font style="color:rgb(31, 35, 41);">的余数是1，即</font>$ ( 2^4 \equiv 1 \pmod{5} ) $<font style="color:rgb(31, 35, 41);">，符合公式。 </font></p><p><strong><font style="color:rgb(31, 35, 41);">补充说明</font></strong><font style="color:rgb(31, 35, 41);">：</font></p><p><font style="color:rgb(31, 35, 41);"> 欧拉定理中， n 是任意与 a 互质的正整数；而当 n 是质数 p 时，欧拉函数 φ(p)&#x3D;p-1 ，因此费马小定理是欧拉定理在“ n 为质数”时的简化形式。</font></p><p><font style="color:rgb(31, 35, 41);"></font></p><h3 id="中国剩余定理："><a href="#中国剩余定理：" class="headerlink" title="中国剩余定理："></a><font style="color:rgb(31, 35, 41);">中国剩余定理：</font></h3><p>若两个数 m 和 n 互质，则对于任意整数 a、b，存在唯一的整数 x（在模 mn 的范围内），使得</p><p>$ x≡a(\mod m) $ 且 $ x≡b(\mod n) $</p><h3 id="欧几里得算法（辗转相除法）"><a href="#欧几里得算法（辗转相除法）" class="headerlink" title="欧几里得算法（辗转相除法）"></a><font style="color:rgb(31, 35, 41);">欧几里得算法（辗转相除法）</font></h3><p><font style="color:rgb(31, 35, 41);">欧几里得算法是求</font><strong><font style="color:rgb(31, 35, 41);">两个正整数最大公约数（记为gcd）</font></strong><font style="color:rgb(31, 35, 41);">的高效方法，这是RSA选择公钥的关键工具之一。</font></p><p><strong><font style="color:rgb(31, 35, 41);">核心原理 </font></strong></p><p><font style="color:rgb(31, 35, 41);">对于两个正整数 a、b （要求 a &gt; b ），它们的最大公约数，等于“较小数 b ”和“ a 除以 b 的余数”的最大公约数，即：</font>$ gcd(a, b) &#x3D; gcd(b, a \mod b) $<font style="color:rgb(31, 35, 41);">重复这个“用余数替换大数”的过程，直到余数为0，此时的</font><strong><font style="color:rgb(31, 35, 41);">除数</font></strong><font style="color:rgb(31, 35, 41);">就是原来两个数的最大公约数。</font></p><p><strong><font style="color:rgb(31, 35, 41);">算法步骤</font></strong><font style="color:rgb(31, 35, 41);">（以</font>$ ( \gcd(24, 18) ) $<font style="color:rgb(31, 35, 41);">为例）</font></p><p><font style="color:rgb(31, 35, 41);"> 1. 计算</font>$ ( 24 \mod 18 &#x3D; 6 ) $<font style="color:rgb(31, 35, 41);">，问题简化为求</font>$ ( \gcd(18, 6) ) $<font style="color:rgb(31, 35, 41);">； </font></p><p><font style="color:rgb(31, 35, 41);">2. 计算</font>$ ( 18 \mod 6 &#x3D; 0 ) $<font style="color:rgb(31, 35, 41);">，余数为0，停止运算； </font></p><p><font style="color:rgb(31, 35, 41);">3. 此时的除数是6，因此</font>$ ( \gcd(24, 18) &#x3D; 6 ) $<font style="color:rgb(31, 35, 41);">。</font></p><p><strong><font style="color:rgb(31, 35, 41);">RSA中的作用</font></strong><font style="color:rgb(31, 35, 41);"> </font></p><p><font style="color:rgb(31, 35, 41);">在RSA选择公钥 e 时，要求 e 与 φ(n) 互质（即</font>$ ( \gcd(e, φ(n)) &#x3D; 1 ) $<font style="color:rgb(31, 35, 41);">）。我们可以通过欧几里得算法，快速计算 e 和 φ(n) 的最大公约数，以此判断 e 是否符合公钥的要求。</font></p><h3 id="扩展欧几里得算法"><a href="#扩展欧几里得算法" class="headerlink" title="扩展欧几里得算法"></a>扩展欧几里得算法</h3><p>在 a 与模数 m 互质的前提下，求解 a 在模 m 下的乘法逆元<br>方程形式：$ (ax \equiv 1 \pmod{m})$ 其中x就是a在模m下的乘法逆元<br>等价转化为不定方程：$(\boldsymbol{ax + my &#x3D; 1})$<br>前提条件：$(\gcd(a,m)&#x3D;1)$，<strong>只有 a 和模数 m 互质，逆元才存在</strong>。</p><hr><h2 id="RSA-算法的实现步骤"><a href="#RSA-算法的实现步骤" class="headerlink" title="RSA 算法的实现步骤"></a>RSA 算法的实现步骤</h2><p>RSA 算法的实现可以分为以下几个步骤：</p><h3 id="1-密钥生成"><a href="#1-密钥生成" class="headerlink" title="1. 密钥生成"></a>1. 密钥生成</h3><ol><li>选择两个大质数 p 和 q。</li><li>计算 n&#x3D;p×q。</li><li>计算欧拉函数 $ ϕ(n)&#x3D;(p−1)×(q−1) $。</li><li>选择一个整数 e，满足 1&lt;e&lt;ϕ(n) 且 e 与 ϕ(n) 互质。e 通常选择 65537，因为它是一个质数且二进制表示中只有两个 1，便于快速计算。</li><li>计算 d，使得 $ d×e≡1\modϕ(n) $。d 是 e 的模逆元，可以通过扩展欧几里得算法计算。</li><li>公钥为 (e,n)，私钥为 (d,n)，私钥用于解密和数字签名，需严格保密。</li></ol><h3 id="2-加密过程"><a href="#2-加密过程" class="headerlink" title="2. 加密过程"></a>2. 加密过程</h3><p>对于明文 M，计算密文 ：</p><p>$ C&#x3D;M^{e}\mod n $</p><p>补充：明文 M 需满足0≤M&lt;n，若 M≥n，需先分块处理</p><h3 id="3-解密过程"><a href="#3-解密过程" class="headerlink" title="3. 解密过程"></a>3. 解密过程</h3><p>对于密文 C，计算明文 M：</p><p>$ M&#x3D;C^{d}\mod n $</p><h2 id="RSA算法逻辑"><a href="#RSA算法逻辑" class="headerlink" title="RSA算法逻辑"></a>RSA算法逻辑</h2><p>因为我们并不是数学专业的学生，学习时没必要对使用到的定理&#x2F;函数等太过于深究，但关于RSA算法逻辑部分还是需要进行了解的。</p><p>为了便于对RSA算法的接受，下面会从数学角度进行说明，采用数学角度讲解，也是有助于对其的理解以及今后的学习和使用，当然这里也不会在这方面太过详细地说明。</p><p>RSA算法之所以可以被用来进行非对称加密，主要原因是存在加密：$ C&#x3D;M^{e}\mod n $ 和解密：$ M&#x3D;C^{d}\mod n $ ，将两个公式合并之后得到$ M^{e⋅d}≡M(\mod n) $，也就是说$ M^{e⋅d}≡M(\mod n) $的成立，是RSA算法的核心，接下来我们来推导一下：</p><p>当M与n互质时，已知：</p><p>$ a^{ϕ(n)} ≡1( \mod n ) $      以及      $ e⋅d≡1(\modϕ(n)) $   </p><p>那么：</p><p>$ M^{ed}&#x3D;M^{k⋅ϕ(n)+1}&#x3D;(M^{ϕ(n)})^{k}⋅M≡1^k⋅M≡M(\mod n) $ </p><p>及：</p><p>$ M^{e⋅d}≡M(\mod n) $</p><p>当M与n不互质时：</p><p>先说明：</p><p>RSA 里的n是两个大质数的乘积（n&#x3D;p×q），所以 M 和 n 不互质的话，M 肯定是p的倍数，或者是q</p><p>的倍数（因为 M 是明文，通常M&lt;n，不会同时是 p 和 q 的倍数，否则M≥pq&#x3D;n啦）。</p><p>假设 M 是p的倍数，即M&#x3D;kp（k是整数，且k&lt;q）：</p><ol><li>因为q是质数，M&#x3D;kp和q互质（q不整除kp），根据费马小定理，</li></ol><p>$ M ^{q−1 }≡1(\mod q) $。</p><ol start="2"><li>而$ φ(n)&#x3D;(p−1)(q−1) $，所以$ M ^{φ(n)} &#x3D;[M^{ q−1} ] ^{p−1 }≡1 ^{p−1 }&#x3D;1(\mod q) $，即</li></ol><p>$ M ^{φ(n)} &#x3D;1+tq $（t是整数）。</p><ol start="3"><li>已知$ e⋅d≡1(\modφ(n)) $，所以$ ed&#x3D;1+sφ(n) $（s是整数），代入得：</li></ol><p>$ M ^{ed} &#x3D;M ^{1+sφ(n)} &#x3D;M×(M ^{φ(n)} ) ^s &#x3D;M×(1+tq) ^s $</p><ol start="4"><li>展开$ (1+tq) ^s $ 后得$ 1+C(s,1)tq+…+(tq) ^s $，除了第一项 “1”，其他项都包含q，因此：</li></ol><p>$ M ^{ed} &#x3D;M+M×t ‘ q $（t ′ 是整数）</p><ol start="5"><li>又因为M&#x3D;kp，所以$ M×t’ q&#x3D;kp×t ‘q&#x3D;t ‘ k×n $，这一项模n等于 0，最终：</li></ol><p>$ M^{ed} ≡M(\mod n) $</p><p>这便是RSA的核心等式的由来。</p><p>令 $ C &#x3D; M^e $ ，则 $ C^d ≡ M (\mod n) $   且C满足： $ C ≡ M^e(\mod n) $</p><p>整理后：<br>$ C &#x3D; M^e (\mod n) $<br>$ M &#x3D; C^d (\mod n) $</p><p>这就是RSA的数学逻辑原理，怎么样，这么一看是不是对RSA算法有了更清晰的认识。</p><h2 id="RSA算法优化技术"><a href="#RSA算法优化技术" class="headerlink" title="RSA算法优化技术"></a>RSA算法优化技术</h2><p>由于 RSA 算法的计算量较大，实际应用中通常采用优化后的算法：</p><h3 id="CRT加速"><a href="#CRT加速" class="headerlink" title="CRT加速"></a>CRT加速</h3><p>CRT（中国剩余定理）通过分解模数提升 RSA 解密效率。具体来说，RSA 私钥通常包含以下参数：</p><ul><li>模数$ (n &#x3D; p \times q) $（p 和 q 为大素数）</li><li>私钥指数 d</li><li>CRT 优化参数：<ul><li>$ (d_p &#x3D; d \mod (p-1)) $</li><li>$ (d_q &#x3D; d \mod (q-1)) $</li><li>$ (q^{-1} \mod p)（q 在模 p 下的逆元） $</li></ul></li></ul><p>解密时，CRT 将原本的大数运算 $ (C^d \mod n) $分解为：</p><ol><li>计算 $ (m_p &#x3D; c^{d_p} \mod p) $</li><li>计算$ (m_q &#x3D; c^{d_q} \mod q) $</li><li>通过 CRT 合并结果：$ (m &#x3D; m_q + q \times \left( (m_p - m_q) \times q^{-1} \mod p \right)) $</li></ol><h4 id="CRT原理"><a href="#CRT原理" class="headerlink" title="CRT原理"></a>CRT原理</h4><h5 id="为什么能拆解？（核心依据：中国剩余定理-费马小定理）"><a href="#为什么能拆解？（核心依据：中国剩余定理-费马小定理）" class="headerlink" title="为什么能拆解？（核心依据：中国剩余定理+费马小定理）"></a>为什么能拆解？（核心依据：中国剩余定理+费马小定理）</h5><p>RSA中( n &#x3D; p×q )（( p、q )是互质的大质数），根据中国剩余定理：<br>“若两个数互质，则任意整数对这两个数的模结果，能唯一确定它对这两个数乘积的模结果”。</p><p>所以解密时的$ ( C^d \mod n ) $，可以拆成先算$ ( C^d \mod p ) $和$ ( C^d \mod q ) $，再合并这两个结果——这是拆解的前提。</p><h5 id="分解公式的推导"><a href="#分解公式的推导" class="headerlink" title="分解公式的推导"></a>分解公式的推导</h5><p>已知私钥指数( d )满足$ ( e·d ≡ 1 \pmod{φ(n)} ) $，且$ ( φ(n) &#x3D; (p-1)(q-1) ) $，我们定义：</p><p>$ ( d_p &#x3D; d \mod (p-1) )、( d_q &#x3D; d \mod (q-1)  $</p><p><strong>步骤1</strong>：推导$ ( m_p &#x3D; C^{d_p} \pmod{p} ) $</p><p>因为$ ( d &#x3D; k·(p-1) + d_p ) $（( k )是整数），所以：</p><p>$ C^d &#x3D; C^{k·(p-1) + d_p} &#x3D; \left[C^{p-1}\right]^k · C^{d_p}  $</p><p>又因为 p 是质数，若 C 与 p 互质，根据费马小定理，$ ( C^{p-1} ≡ 1 \pmod{p} ) $，因此：</p><p>$  C^d ≡ 1^k · C^{d_p} ≡ C^{d_p} \pmod{p}  $    即       $ ( m_p &#x3D; C^{d_p} \pmod{p} ) $</p><p>（若( C )是( p )的倍数，$ ( C ≡ 0 \pmod{p} ) $，则$ ( C^d ≡ 0 ≡ C^{d_p} \pmod{p} ) $，结论同样成立）。</p><p><strong>步骤2</strong>：同理推导$ ( m_q &#x3D; C^{d_q} \pmod{q} ) $</p><p>和步骤1完全一致：因为$ ( d &#x3D; t·(q-1) + d_q ) $，结合费马小定理，可得：</p><p>$  C^d ≡ C^{d_q} \pmod{q}  $     即     $ ( m_q &#x3D; C^{d_q} \pmod{q} ) $。</p><p><strong>步骤3</strong>：推导合并公式</p><p>根据中国剩余定理，要找( m )满足：</p><p>$ ( m ≡ m_p \pmod{p} ) $</p><p>$ ( m ≡ m_q \pmod{q} ) $</p><p>设$ ( m &#x3D; m_q + q·t ) $（ t 是整数），代入第一个条件：</p><p>$  m_q + q·t ≡ m_p \pmod{p}  $</p><p>整理得：</p><p>$  q·t ≡ (m_p - m_q) \pmod{p}  $</p><p>因为 q 与 p 互质， q 存在模 p 的逆元$ ( q^{-1} \pmod{p} ) $，两边同乘逆元得：</p><p>$  t ≡ (m_p - m_q) · q^{-1} \pmod{p}  $</p><p>将 t 代回 m 的表达式，就得到合并公式：</p><p>$  m &#x3D; m_q + q × \left( (m_p - m_q) × q^{-1} \pmod{p} \right)  $</p><h2 id="RSA-算法的安全性分析"><a href="#RSA-算法的安全性分析" class="headerlink" title="RSA 算法的安全性分析"></a>RSA 算法的安全性分析</h2><p>RSA 算法的安全性基于以下两个假设：</p><p><strong>质因数分解难题：</strong></p><p>对于一个大的合数 n&#x3D;p×q，分解 n 为 p 和 q 是非常困难的。</p><p><strong>离散对数难题：</strong></p><p>在已知 e 和 n 的情况下，计算 d 是非常困难的。</p><ol><li>密钥长度</li></ol><p>RSA 算法的安全性依赖于密钥长度。常见的密钥长度有 1024 位、2048 位和 4096 位。<font style="color:rgba(0, 0, 0, 0.85);">随着经典计算能力的提升，1024 位密钥的安全性已不足；而量子计算机（如通过 Shor 算法）在理论上可高效分解大整数，进一步威胁 RSA 安全性。目前（2025 年），2048 位及更长的 RSA 密钥，无论经典计算机还是已实现的量子计算机都无法破解</font>，平时使用时，推荐使用 2048 位或更长的密钥。</p><ol start="2"><li>攻击方法</li></ol><p>暴力破解：尝试所有可能的私钥，计算量极大，不可行。</p><p>数学攻击：通过数学方法分解 n，例如使用数域筛法（NFS）或通用数域筛法（GNFS）。</p><p>侧信道攻击：通过分析加密设备的功耗、电磁辐射等信息，推测私钥。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术科普</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>密码学</tag>
+      
+      <tag>数字安全</tag>
+      
+      <tag>RSA算法</tag>
+      
+      <tag>非对称加密</tag>
+      
+      <tag>信息安全技术</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>数字签名与数字证书：一场关于信任的“加密冒险”</title>
+    <link href="/2025/12/23/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%EF%BC%9A%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E4%BF%A1%E4%BB%BB%E7%9A%84%E2%80%9C%E5%8A%A0%E5%AF%86%E5%86%92%E9%99%A9%E2%80%9D/"/>
+    <url>/2025/12/23/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%EF%BC%9A%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E4%BF%A1%E4%BB%BB%E7%9A%84%E2%80%9C%E5%8A%A0%E5%AF%86%E5%86%92%E9%99%A9%E2%80%9D/</url>
+    
+    <content type="html"><![CDATA[<h2 id="问题来了"><a href="#问题来了" class="headerlink" title="问题来了"></a>问题来了</h2><p>想象一下，你们公司需要和远方的合作伙伴签署一份价值百万的合同。但你们从未见过面，只能通过电子邮件沟通。 </p><ul><li><strong>问题一</strong>：你怎么确定对方发来的合同内容没有被黑客偷偷修改？ </li><li><strong>问题二</strong>：如果对方否认签过字，你拿什么证明是他&#x2F;她发的？</li></ul><p>看来，你们公司需要一套规则，确保合同安全，让双方都能安心。</p><hr><h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><p>聪明的你提出了一个主意：“我们可以给每份文件打上独一无二的‘指纹’，用来保障 “<strong>信息完整性</strong> + <strong>不可否认性</strong>”！” </p><ol><li><strong>指纹</strong>：</li></ol><p>用“<strong>哈希算法</strong>”（比如<code>SHA-256</code>）把文件内容搅成一串乱码，以得到一个哈希值。</p><p>这个哈希值就是“指纹”，</p><ol start="2"><li><strong>签名</strong>：</li></ol><p>发送方用自己的<strong>私钥</strong>（只有自己知道的秘密密码）把指纹加密，生成“数字签名”。 </p><ol start="3"><li><strong>验证</strong>：</li></ol><p>接收方收到文件后，先用公开的<strong>公钥</strong>解密签名，还原出指纹。 </p><p>然后自己用同样的哈希算法重新计算文件的指纹。 </p><p>如果两个指纹一模一样，说明文件没被动过手脚，而且一定是私钥的主人发的。</p><p><strong>为什么管用？</strong></p><p>哈希算法可以保障，任何微小的文件修改，得到的指纹都会彻底变样。</p><p>私钥只有一个人有，所以生成是数字签名就像“我的亲笔签名”； </p><hr><h2 id="问题又来了"><a href="#问题又来了" class="headerlink" title="问题又来了"></a>问题又来了</h2><p>网络空间并不安全，你怎么知道对方的公钥是真的？而不是坏人伪装的？</p><h2 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h2><p>聪明的你又想到，我们可以找一个“权威法官”来为我们证明身份，而这个权威机构给我们颁发的证明就是<strong>数字证书</strong>。 </p><ol><li><strong>证书的诞生</strong>：</li></ol><p>一家权威机构（CA，比如“数字世界的公证处”）会验证你的身份。 </p><p>它会把你的公钥、姓名、公司等信息打包，再用自己的私钥盖章，生成“数字证书”。</p><ol start="2"><li><strong>证书的验证</strong>：</li></ol><p>当别人收到你的公钥时，会先检查你的证书。 </p><p>用CA的公钥解开证书上的签名，确认信息没被篡改。 </p><p>如果证书没问题，就能放心用你的公钥去验证签名了。</p><p><strong>为什么管用？</strong></p><p>CA相当于现实中的公证处，它的职责就是证明身份，所以不会骗人；</p><p>CA的公钥是<strong>根CA公钥</strong>，是计算机出厂前预装的公钥，这样就可以保证CA的公钥可信； </p><p>证书把公钥和身份绑在一起，就解决了个人公钥不可信的问题。</p><hr><h2 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h2><p>你们公司顺利完成这单合同，你为公司省下差旅费和时间，作为方案提供者，聪明的你也是受到了来自老板的奖赏。</p><hr><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h3 id="数字签名与数字证书的作用："><a href="#数字签名与数字证书的作用：" class="headerlink" title="数字签名与数字证书的作用："></a>数字签名与数字证书的作用：</h3><p><strong>身份认证</strong>：在数字通信中，需验证通信双方的身份真实性，避免冒充或伪造。</p><p><strong>数据完整性</strong>：确保传输的数据未被篡改，防止中间人攻击。</p><p><strong>不可否认性</strong>：通过技术手段约束发送方无法否认其行为（如合同签署）。</p><p><strong>简化信任机制</strong>：通过第三方机构（CA）建立信任链，解决公钥分发和身份验证的难题。</p><h3 id="数字签名与数字证书的定义"><a href="#数字签名与数字证书的定义" class="headerlink" title="数字签名与数字证书的定义"></a>数字签名与数字证书的定义</h3><h4 id="数字签名-1"><a href="#数字签名-1" class="headerlink" title="数字签名"></a>数字签名</h4><p><strong>定义</strong>：通过加密算法对数据生成唯一标识，用于验证数据来源和完整性。</p><p><strong>核心要素</strong>：哈希算法（生成摘要）+ 非对称加密（私钥签名，公钥验证）。</p><h4 id="数字证书-1"><a href="#数字证书-1" class="headerlink" title="数字证书"></a>数字证书</h4><p><strong>定义</strong>：由权威机构（CA）颁发的电子文档，绑定公钥与身份信息，证明公钥持有者的合法性。</p><p><strong>核心要素</strong>：公钥、身份信息、CA签名。</p><h2 id="尾声：信任，从一串代码开始"><a href="#尾声：信任，从一串代码开始" class="headerlink" title="尾声：信任，从一串代码开始"></a>尾声：信任，从一串代码开始</h2><p>数字签名和证书，本质上是一场关于<strong>信任</strong>的精密游戏。 </p><ul><li>它们用数学和算法，把“我信你”变成了“我用代码证明信你”； </li><li>它们让远隔千里的陌生人，也能像面对面签合同一样安全。</li></ul><p>下次当你在网上买东西、登录银行账户时，不妨想一想：那些看不见的代码，正在为你编织一张庞大的信任之网。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术科普</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>密码学</tag>
+      
+      <tag>数字安全</tag>
+      
+      <tag>科普</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2025/12/15/hello-world/"/>
+    <url>/2025/12/15/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>欢迎使用 <a href="https://hexo.io/">Hexo</a>！这是你的第一篇文章。如需了解更多信息，请查看 <a href="https://hexo.io/docs/">官方文档</a>。如果在使用 Hexo 过程中遇到任何问题，可以在 <a href="https://hexo.io/docs/troubleshooting.html">问题排查</a> 中寻找答案，或在 <a href="https://github.com/hexojs/hexo/issues">GitHub</a> 上向我们提问。</p><span id="more"></span> <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/writing.html">写作指南</a></p><h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/server.html">服务器配置</a></p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/generating.html">静态文件生成</a></p><h3 id="部署到远程站点"><a href="#部署到远程站点" class="headerlink" title="部署到远程站点"></a>部署到远程站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/one-command-deployment.html">一键部署</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>win11电脑配置C C++的编译环境</title>
+    <link href="/2025/08/06/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/"/>
+    <url>/2025/08/06/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="win11电脑配置C-C-的编译环境"><a href="#win11电脑配置C-C-的编译环境" class="headerlink" title="win11电脑配置C&#x2F;C++的编译环境"></a>win11电脑配置C&#x2F;C++的编译环境</h1><span id="more"></span> <p>参考链接：</p><p><a href="https://blog.csdn.net/qq_42417071/article/details/137438374">VS Code 配置 C&#x2F;C++ 编程运行环境（保姆级教程）_vscode配置c++环境-CSDN博客</a></p><p>PS：上述链接里有更详细更全面的关于VS code中配置C&#x2F;C++编译环境的教程</p><h1 id="1-下载MinGW-W64"><a href="#1-下载MinGW-W64" class="headerlink" title="1.  下载MinGW-W64"></a>1.  下载MinGW-W64</h1><p>可以选择去官网下载</p><p><a href="https://www.mingw-w64.org/source/">Source Code - mingw-w64</a></p><p>（PS：当然，官网下载可能比较慢，而且我没试过，所以不清楚流程是否一样）</p><p>百度网盘下载</p><p>Github下载</p><h1 id="2-安装MinGW-W64"><a href="#2-安装MinGW-W64" class="headerlink" title="2.安装MinGW-W64"></a>2.安装MinGW-W64</h1><p>双击打开 msys2-x86_64-20250221.exe 文件</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image.png" alt="安装步骤截图"></p><p>之后全部选择默认安装即可</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image1.png" alt="image.png"></p><p>这里安装路径如果要更改的话，请一定要记住安装路径，之后要用到的</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image2.png" alt="image.png"></p><p>选择“下一步”</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image3.png" alt="image.png"></p><p>等待安装完成即可（PS：进度条可能会长时间停留在50%，这是正常现象，继续等待即可）</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image4.png" alt="image.png"></p><p>选择“下一步”</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image5.png" alt="image.png"></p><p>如果没有自动勾选”立即运行MSYS2“，自己勾选上，然后点击”完成“</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image6.png" alt="image.png"></p><p>点击完成之后，等待一下，就会出现这个命令框</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image7.png" alt="image.png"></p><p>然后在命令框中输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain<br></code></pre></td></tr></table></figure><p>PS：     S是大写         devel是英文，l可能会应为字体原因被认为是数字1</p><p>这里直接点击回车键即可</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image8.png" alt="image.png"></p><p>输入”Y”，点击回车</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image9.png" alt="image.png"></p><p>静静等待即可</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image10.png" alt="image.png"></p><p>安装完成之后，关闭窗口</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image11.png" alt="image.png"></p><p>打开安装MSYS2的目录,之后  <code>ucrt64  —&gt;  bin</code> ，进入到bin文件夹中之后，复制路径</p><p>如果，一开始是选择的默认安装路径，那路径就是<code>C:\msys64\ucrt64\bin</code>。</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image12.png" alt="image.png"></p><h1 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3. 配置环境变量"></a>3. 配置环境变量</h1><p>之后在“开始”菜单中搜素“编辑系统环境变量”，然后打开</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image13.png" alt="image.png"></p><p>在“系统属性”界面点击“环境变量”</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image14.png" alt="image.png"></p><p>在“环境变量”界面双击“Path”</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image15.png" alt="image.png"></p><p>在”编辑环境变量“界面选择”新建“，之后会在中间空白部分有一个可填写的区域，在区域中粘贴上刚刚复制的路径，之后点击”确定“</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image16.png" alt="image.png"></p><p>之后一路点击”确定“返回即可</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image17.png" alt="image.png"></p><h1 id="验证是否配置成功"><a href="#验证是否配置成功" class="headerlink" title="验证是否配置成功"></a>验证是否配置成功</h1><p><code>win+R</code> 输入<code>cmd</code> 点击回车打开命令提示符</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image18.png" alt="image.png"></p><p>之后依次输入以下内容并回车</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc --version<br><br>g++ --version<br><br>gdb --version<br></code></pre></td></tr></table></figure><p>如果出现以下内容就是配置成功了</p><p><img src="/img/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/image19.png" alt="image.png"></p><p>来，给自己“呱唧呱唧”。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-windows -C/C++ -配置编译环境</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>小工具/教程</title>
+    <link href="/2025/08/06/%E5%B0%8F%E5%B7%A5%E5%85%B7-%E6%95%99%E7%A8%8B/"/>
+    <url>/2025/08/06/%E5%B0%8F%E5%B7%A5%E5%85%B7-%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="小工具-教程"><a href="#小工具-教程" class="headerlink" title="小工具&#x2F;教程#"></a>小工具&#x2F;教程#</h1><span id="more"></span> <p>这算是一个合集，主要是我在学习和工作中了解到的一些知识，比较琐碎，本想的是我自己总结一下，加深记忆而且方便之后学习和使用，但是感觉有点太麻烦了，所以干脆保留这些网址，之后再使用时直接访问，而且还可以在添加一些自己遇到的一些教程中没有提到的东西</p><hr><h1 id="VSCode中安装Live-Server插件实现Html网页代码的实时预览"><a href="#VSCode中安装Live-Server插件实现Html网页代码的实时预览" class="headerlink" title="VSCode中安装Live Server插件实现Html网页代码的实时预览"></a>VSCode中安装Live Server插件实现Html网页代码的实时预览</h1><p><a href="https://blog.csdn.net/m0_46772594/article/details/113485804">VSCode中安装Live Server插件实现Html网页代码的实时预览_vsc html插件 实时展示-CSDN博客</a> </p><p>PS：想要插件起作用需要将文件导入到VS Code中，仅仅是使用VS Code打开html文件，插件是没办法起作用的</p><hr><h1 id="关于HTML引入CSS文件后没有效果"><a href="#关于HTML引入CSS文件后没有效果" class="headerlink" title="关于HTML引入CSS文件后没有效果#"></a>关于HTML引入CSS文件后没有效果#</h1><p>这个问题我想应该是大多数人初次学习前端时经常遇到的问题了，这里整理了一些我遇到的情况</p><h2 id="1-路径问题"><a href="#1-路径问题" class="headerlink" title="1. 路径问题##"></a>1. 路径问题##</h2><link>标签的href属性的路径有问题，一般情况下建议使用相对路径，写的时候方便，看的时候易懂，一般情况下移动文件不用修改路径。<p>还有当HTML文件在HTML文件夹内时（PS：假定CSS文件夹与HTML文件夹是同一层），填写相对路径时要先返回上一路径</p><h2 id="2-type属性问题"><a href="#2-type属性问题" class="headerlink" title="2. type属性问题##"></a>2. type属性问题##</h2><link>标签可以有type属性，但是type应该写成rel <p>如果我要表达不清楚的地方，请移步以下网址：</p><p><a href="https://blog.csdn.net/qq_57408330/article/details/128978102">关于html引入css文件后没有效果问题_link引入css不起作用-CSDN博客</a> </p><hr><h1 id="Sublime-Text运行C和C-程序"><a href="#Sublime-Text运行C和C-程序" class="headerlink" title="Sublime Text运行C和C++程序#"></a>Sublime Text运行C和C++程序#</h1><p>要想Sublime Text可以运行C&#x2F;C++程序，电脑上要有C&#x2F;C++的解释器，</p><p>检查是否有C&#x2F;C++解释器，在终端中输入以下命令</p><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">gcc</span> <span class="hljs-literal">--</span><span class="hljs-comment">version</span><br><span class="hljs-comment">g</span><span class="hljs-literal">++</span> <span class="hljs-literal">--</span><span class="hljs-comment">version</span><br><span class="hljs-comment">gdb</span> <span class="hljs-literal">--</span><span class="hljs-comment">version</span><br></code></pre></td></tr></table></figure><p>输入后得到以下的输出说明解释器已经配置好了</p><p><img src="/img/%E5%B0%8F%E5%B7%A5%E5%85%B7-%E6%95%99%E7%A8%8B/png1.png" alt="png1.png"></p><p>如果，没有解释器，可以参考这篇博客添加解释器</p><p><a href="http://localhost:4000/2025/08/06/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC%20C++%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/win11%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AEC-C-%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/">win11电脑配置C C++的编译环境 | KTDF</a> </p><p>之后的操作参考这篇博客：</p><p><a href="https://www.cnblogs.com/chuqianyu/p/15792207.html">Sublime Text运行C和C++程序 - 楚千羽 - 博客园</a> </p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>·教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>windows和Office激活教程</title>
+    <link href="/2025/08/05/windows%E5%92%8COffice%E6%BF%80%E6%B4%BB%E6%95%99%E7%A8%8B/"/>
+    <url>/2025/08/05/windows%E5%92%8COffice%E6%BF%80%E6%B4%BB%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<p>windows和Office激活教程</p><span id="more"></span><ol><li><p><strong>打开 PowerShell</strong><br>请按 Windows 键 + X，然后选择 PowerShell 或终端。</p></li><li><p><strong>手动输入下面的代码，然后按 Enter。</strong><br>PS：复制并粘贴可能无法使用</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">irm</span> https://get.activated.win | <span class="hljs-built_in">iex</span><br></code></pre></td></tr></table></figure></li><li><p><strong>选择激活项目</strong></p><p>您将看到激活选项。选择以绿色突出显示的激活选项，输入要激活的项目序号，之后按照要求操作即可。</p></li><li><p><strong>激活完成</strong><br>good</p></li><li><p><strong>若以上方法无效，请移步以下网址</strong><br><a href="https://github.com/massgravel/Microsoft-Activation-Scripts">https://github.com/massgravel/Microsoft-Activation-Scripts</a></p></li></ol><p><strong><a href="https://github.com/massgravel/Microsoft-Activation-Scripts">参考资料</a></strong></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-Windows激活 -office激活</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>VS code设置自动保存教程</title>
+    <link href="/2025/08/05/VS-code%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E6%95%99%E7%A8%8B/"/>
+    <url>/2025/08/05/VS-code%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="VS-code中设置自动保存教程"><a href="#VS-code中设置自动保存教程" class="headerlink" title="VS code中设置自动保存教程"></a>VS code中设置自动保存教程</h1><span id="more"></span> <ol><li><h3 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h3><p>打开<strong>VS code</strong> 。</p></li><li><h3 id="然后进行以下操作"><a href="#然后进行以下操作" class="headerlink" title="然后进行以下操作"></a>然后进行以下操作</h3><p>点击“<strong>文件</strong>”–&gt; 选择“<strong>首选项</strong>”–&gt;点击“<strong>设置</strong>”–&gt; 输入“<strong>after delay</strong>” –&gt; 将Auto Save项目设置成“<strong>after delay</strong>”。</p><p>如果在Auto Save项目的上下有关于<em>自动保存的选项</em>也一并<strong>勾选</strong></p></li><li><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>关闭设置窗口即可。</p></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-VS code -教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Sublime Text汉化教程</title>
+    <link href="/2025/08/05/Sublime-Text%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/"/>
+    <url>/2025/08/05/Sublime-Text%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="将Sublime-Text汉化"><a href="#将Sublime-Text汉化" class="headerlink" title="将Sublime Text汉化"></a>将Sublime Text汉化</h1><span id="more"></span> <p>要将Sublime Text设置为中文，可以按照以下步骤进行：</p><ol><li><strong>打开Sublime Text</strong>：启动Sublime Text应用程序。</li><li><strong>打开命令面板</strong>：使用快捷键 <code>Shift + Ctrl + P</code> 打开命令面板 。</li><li><strong>安装Package Control插件</strong>：在命令面板中输入 <code>Install Package Control</code> 并按回车键。如果是第一次安装，会弹出确认框，点击确定即可 。</li><li><strong>安装中文语言包</strong>：再次打开命令面板（<code>Shift + Ctrl + P</code>）。输入 <code>Package Control: Install Package</code> 并按回车键。在弹出的搜索框中输入 <code>ChineseLocalizations</code>，选择并安装 。</li><li><strong>设置语言为简体中文</strong>：安装完成后，重启Sublime Text。点击菜单栏中的 <code>Help -&gt; Language -&gt; 简体中文</code> 。</li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-Sublime Text -教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Sublime Text安装emmet</title>
+    <link href="/2025/08/05/Sublime-Text%E5%AE%89%E8%A3%85emmet/"/>
+    <url>/2025/08/05/Sublime-Text%E5%AE%89%E8%A3%85emmet/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Sublime-Text安装emmet"><a href="#Sublime-Text安装emmet" class="headerlink" title="Sublime Text安装emmet"></a>Sublime Text安装emmet</h1><span id="more"></span> <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Emmet是一款Web前端开发工具Sublime的插件，使用仿CSS选择器的语法来生成代码，提高了HTML和CSS代码编写的速度。只需按住Tab键即可把一个简写展开成HTML和CSS的代码块，大部分标签都可自动生成。 </p><ol><li>首先安装Package Control插件管理系统<ol><li><strong>打开Sublime Text</strong>：启动Sublime Text应用程序。</li><li><strong>打开命令面板</strong>：使用快捷键 <code>Shift + Ctrl + P</code> 打开命令面板 。</li><li><strong>安装Package Control插件</strong>：在命令面板中输入 <code>Install Package Control</code> 并按回车键。如果是第一次安装，会弹出确认框，点击确定即可 。</li></ol></li><li>安装emmet插件<ol><li><strong>打开命令面板</strong>：重启后，按住快捷键Ctrl+Shift+P或者在菜单栏选择Perferences–&gt;Package Control即可打开命令面板，如若没有反应稍等一下便会弹出 </li><li><strong>打开package</strong>：在命令面板找到package control install package，或者在命令面板输入”pcip”即这四个单词的首字母 </li><li><strong>安装emmet插件</strong>：在package的面板中搜索emmet找到后点击回车键，稍后便会自动安装。</li></ol></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-Sublime Text -教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Git操作教程</title>
+    <link href="/2025/08/05/Git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/"/>
+    <url>/2025/08/05/Git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Git-基础操作手册"><a href="#Git-基础操作手册" class="headerlink" title="Git 基础操作手册#"></a>Git 基础操作手册#</h1><span id="more"></span> <p>PS:（目前仅有在本地使用Git的教程，2025.08.05）</p><h3 id="一、初始化仓库"><a href="#一、初始化仓库" class="headerlink" title="一、初始化仓库"></a><strong>一、初始化仓库</strong></h3><p>在项目目录中使用命令 <code>git init</code> 初始化 Git 仓库，会创建名为 .git 的隐藏目录，存放仓库必要文件。</p><h3 id="二、检查文件状态"><a href="#二、检查文件状态" class="headerlink" title="二、检查文件状态"></a><strong>二、检查文件状态</strong></h3><p>使用 <code>git status</code> 命令，可查看当前目录中未跟踪、已修改和已暂存的文件状态。</p><h3 id="三、跟踪新文件"><a href="#三、跟踪新文件" class="headerlink" title="三、跟踪新文件"></a><strong>三、跟踪新文件</strong></h3><ul><li>跟踪单个文件：如跟踪 index.html，执行 <code>git add index.html</code>。</li><li>批量跟踪：用通配符 *，执行 <code>git add *.*</code> 。</li></ul><p>跟踪后再运行 <code>git status</code> 可查看文件处于暂存状态。</p><h3 id="四、提交更新"><a href="#四、提交更新" class="headerlink" title="四、提交更新"></a><strong>四、提交更新</strong></h3><p>使用 <code>git commit -m &quot;提交信息&quot;</code> 命令，将暂存区文件提交到 Git 仓库，-m 后为描述本次提交内容的信息。</p><h3 id="五、修改已提交文件"><a href="#五、修改已提交文件" class="headerlink" title="五、修改已提交文件"></a><strong>五、修改已提交文件</strong></h3><p>修改文件后，先 <code>git add &lt;文件名&gt;</code> 暂存修改，再 <code>git commit -m &quot;修改说明&quot;</code> 提交。</p><h3 id="六、跳过暂存区"><a href="#六、跳过暂存区" class="headerlink" title="六、跳过暂存区"></a><strong>六、跳过暂存区</strong></h3><p>对于已跟踪文件，使用 <code>git commit -a -m &quot;提交信息&quot;</code> 可直接提交，跳过暂存步骤。</p><h3 id="七、移除文件"><a href="#七、移除文件" class="headerlink" title="七、移除文件"></a><strong>七、移除文件</strong></h3><ul><li>从 Git 仓库和工作区同时移除：<code>git rm -f &lt;文件名&gt;</code> ，如 git rm -f index.js 。</li><li>仅从 Git 仓库移除，保留工作区：<code>git rm --cached &lt;文件名&gt;</code> ，如 git rm –cached index.css 。</li></ul><h3 id="八、忽略文件"><a href="#八、忽略文件" class="headerlink" title="八、忽略文件"></a><strong>八、忽略文件</strong></h3><p>创建 .gitignore 文件，按匹配模式列出要忽略的文件或目录，如：</p><ul><li>.log ：忽略所有 .log 文件</li><li><code>node_modules/</code> ：忽略 node_modules 目录</li></ul><h3 id="九、回退到指定版本"><a href="#九、回退到指定版本" class="headerlink" title="九、回退到指定版本"></a><strong>九、回退到指定版本</strong></h3><ul><li>用 <code>git log --pretty=oneline</code> 查看提交历史。</li><li>用 <code>git reset --hard &lt;commitID&gt;</code> 回退到指定版本 。</li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-教程 -Git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
