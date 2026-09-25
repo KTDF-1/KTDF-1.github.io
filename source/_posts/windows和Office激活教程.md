@@ -1,6 +1,7 @@
 ---
 title: windows和Office激活教程
 author: K头的扉
+index_img: /img/windows.jpg
 date: 2025-08-05 12:16:57
 tags:
 	-Windows激活

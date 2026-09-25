@@ -1,6 +1,7 @@
 ---
 title: VS code设置自动保存教程
 author: K头的扉
+index_img: /img/自动保存.png
 date: 2025-08-05 12:16:39
 tags:
 	-VS code

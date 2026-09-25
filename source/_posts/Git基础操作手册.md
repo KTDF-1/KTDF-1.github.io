@@ -1,6 +1,7 @@
 ---
 title: Git操作教程
 author: K头的扉
+index_img: /img/git.jpg
 date: 2025-08-05 12:10:25
 tags:
 	-教程

@@ -1,6 +1,7 @@
 ---
 title: Sublime Text安装emmet
 author: K头的扉
+index_img: /img/安装.png
 date: 2025-08-05 12:16:06
 tags:
 	-Sublime Text	
