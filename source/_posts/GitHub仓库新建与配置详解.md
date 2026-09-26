@@ -5,12 +5,10 @@ toc: true
 comments: true
 date: 2026-09-26 16:17:15
 author: K头的扉
-index_img: 
+index_img: /img/GitHub.png
 categories: 技术教程
-tags: 
-	-教程
-	-GitHub
-	-仓库
+tags: [教程, GitHub, 仓库]
+sticky: 9
 ---
 
 # GitHub 仓库新建与配置详解
@@ -75,12 +73,12 @@ git push -u origin main
 **作用**：
 
 - ​	如果勾选了，仓库创建后就是**非空**的，你可以直接在线编辑或克隆下来
-- ​	如果不勾选，创建的是**空仓库**，需要你本地先有代码再推送上去
+	 ​	如果不勾选，创建的是**空仓库**，需要你本地先有代码再推送上去
 
 **建议**：
 
 - ​	新项目从零开始 → **勾选**，方便直接开始
-- ​	本地已有代码要推上去 → **不勾选**，避免冲突
+	 ​	本地已有代码要推上去 → **不勾选**，避免冲突
 
 ### 5. Add .gitignore（添加 .gitignore 文件）
 
@@ -91,11 +89,11 @@ git push -u origin main
 **常见选项**：
 
 - ​	**None**：不添加
-- ​	**Python**：Python 项目（忽略 **pycache**、.pyc 等）
-- ​	**Node**：Node.js 项目（忽略 node_modules）
-- ​	**Java**：Java 项目（忽略 target、.class 文件）
-- ​	**VisualStudio**：VS 项目文件
-- ​	**建议**：根据你用的编程语言选一个，以后可以再改
+	 ​	**Python**：Python 项目（忽略 **pycache**、.pyc 等）
+	 ​	**Node**：Node.js 项目（忽略 node_modules）
+	 ​	**Java**：Java 项目（忽略 target、.class 文件）
+	 ​	**VisualStudio**：VS 项目文件
+	 ​	**建议**：根据你用的编程语言选一个，以后可以再改
 
 
 ### 6. Choose a license（选择开源许可证）
@@ -134,10 +132,10 @@ git push -u origin main
 **你能做什么**：
 
 - ​	浏览所有文件
-- ​	在线编辑文件
-- ​	查看 README（项目说明）
-- ​	下载代码（Code 按钮）
-- ​	克隆仓库
+	 ​	在线编辑文件
+	 ​	查看 README（项目说明）
+	 ​	下载代码（Code 按钮）
+	 ​	克隆仓库
 
 ### 2. Issues（问题 / 议题）
 
@@ -148,14 +146,14 @@ git push -u origin main
 **常见用法**：
 
 - ​	发现代码有 bug → 开一个 Issue
-- ​	想加新功能 → 开 Issue 讨论
-- ​	记录待办事项
+	 ​	想加新功能 → 开 Issue 讨论
+	 ​	记录待办事项
 
 **Issue 里面有什么**：
 
 - ​	**Labels**（标签）：给 Issue 分类，比如 bug、enhancement、question
-- ​	**Milestones**（里程碑）：把多个 Issue 归到一个版本里
-- ​	**Assignees**（负责人）：指定谁来处理这个 Issue
+	 ​	**Milestones**（里程碑）：把多个 Issue 归到一个版本里
+	 ​	**Assignees**（负责人）：指定谁来处理这个 Issue
 
 ### 3. Pull requests（合并请求）
 
@@ -176,9 +174,9 @@ git push -u origin main
 **你能做什么**：
 
 - ​	新建 PR
-- ​	看 PR 的讨论
-- ​	看代码修改了哪里（Files changed）
-- ​	审核 PR（Review）
+	 ​	看 PR 的讨论
+	 ​	看代码修改了哪里（Files changed）
+	 ​	审核 PR（Review）
 
 ### 4. Actions（自动化）
 
@@ -189,9 +187,9 @@ git push -u origin main
 **能干嘛**：
 
 - ​	自动运行测试
-- ​	自动构建项目
-- ​	自动部署
-- ​	代码提交后自动做一些事情
+	 ​	自动构建项目
+	 ​	自动部署
+	 ​	代码提交后自动做一些事情
 
 **简单说**：就是自动化流水线，不用你手动跑测试、打包了
 
@@ -204,8 +202,8 @@ git push -u origin main
 **能干嘛**：
 
 - ​	把 Issue 和 PR 拖到不同列（待办、进行中、已完成）
-- ​	可视化项目进度
-- ​	团队协作管理任务
+	 ​	可视化项目进度
+	 ​	团队协作管理任务
 
 **适合**：团队项目、需要跟踪进度的项目
 
@@ -218,9 +216,9 @@ git push -u origin main
 **能干嘛**：
 
 - ​	写详细的使用说明
-- ​	写开发文档
-- ​	写 FAQ
-- ​	比 README 更详细，支持多页面
+	 ​	写开发文档
+	 ​	写 FAQ
+	 ​	比 README 更详细，支持多页面
 
 ### 7. Security（安全）
 
@@ -231,8 +229,8 @@ git push -u origin main
 **能干嘛**：
 
 - ​	**Dependabot alerts**：自动检测你的依赖包有没有安全漏洞
-- ​	**Security policy**：告诉别人怎么给你报安全问题
-- ​	**Code scanning**：自动扫描代码里的安全问题
+	 ​	**Security policy**：告诉别人怎么给你报安全问题
+	 ​	**Code scanning**：自动扫描代码里的安全问题
 
 **简单说**：帮你自动找安全隐患
 
@@ -245,10 +243,10 @@ git push -u origin main
 **能看什么**：
 
 - ​	**Contributors**：谁贡献了多少代码
-- ​	**Traffic**：仓库被访问了多少次
-- ​	**Commits**：提交频率
-- ​	**Pulse**：项目活动概况
-- ​	**Dependency graph**：依赖关系图
+	 ​	**Traffic**：仓库被访问了多少次
+	 ​	**Commits**：提交频率
+	 ​	**Pulse**：项目活动概况
+	 ​	**Dependency graph**：依赖关系图
 
 ### 9. Settings（设置）
 
@@ -286,10 +284,10 @@ git push -u origin main
 ​	**权限级别**：
 
 - ​		**Read**：只读
-- ​		**Triage**：能管理 Issue 和 PR
-- ​		**Write**：能推送代码
-- ​		**Maintain**：能管理仓库设置
-- ​		**Admin**：完全权限
+	 ​		**Triage**：能管理 Issue 和 PR
+	 ​		**Write**：能推送代码
+	 ​		**Maintain**：能管理仓库设置
+	 ​		**Admin**：完全权限
 
 ### 4. Webhooks（网络钩子）
 
@@ -298,8 +296,8 @@ git push -u origin main
 ​	**常见用途**：
 
 - ​		推送代码后自动部署
-- ​		自动通知团队群
-- ​		触发其他自动化流程
+	 ​		自动通知团队群
+	 ​		触发其他自动化流程
 
 ### 5. GitHub Pages
 
@@ -308,8 +306,8 @@ git push -u origin main
 ​	**能干嘛**：
 
 - ​		直接放静态网页
-- ​		写博客
-- ​		放项目文档
+	 ​		写博客
+	 ​		放项目文档
 
 
 **网址格式**：https://用户名.github.io/仓库名/
@@ -323,9 +321,9 @@ git push -u origin main
 ​	**里面有什么**：
 
 - ​		**HTTPS**：用 HTTPS 克隆（最常用）
-- ​		**SSH**：用 SSH 密钥克隆（免密码）
-- ​		**GitHub CLI**：用命令行工具克隆
-- ​		**Download ZIP**：直接下载压缩包
+	 ​		**SSH**：用 SSH 密钥克隆（免密码）
+	 ​		**GitHub CLI**：用命令行工具克隆
+	 ​		**Download ZIP**：直接下载压缩包
 
 ### 2. Raw 按钮
 
@@ -354,8 +352,8 @@ git push -u origin main
 ​	**用途**：
 
 - ​		想改别人的项目 → Fork 下来
-- ​		改完提 PR 给原作者
-- ​		自己玩一份
+	 ​		改完提 PR 给原作者
+	 ​		自己玩一份
 
 ### 6. Watch（关注）
 

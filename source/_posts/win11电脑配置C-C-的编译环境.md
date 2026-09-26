@@ -3,10 +3,8 @@ title: win11电脑配置C C++的编译环境
 author: K头的扉
 index_img: /img/C++.png
 date: 2025-08-06 01:38:49
-tags:
-	-windows
-	-C/C++
-	-配置编译环境
+tags: [windows, C/C++, 配置编译环境]
+sticky: 6
 ---
 
 # win11电脑配置C/C++的编译环境

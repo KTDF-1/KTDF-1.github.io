@@ -2,6 +2,7 @@
 title: Hello World
 index_img: /img/hello-world.png
 date: 2025-12-15
+sticky: 2
 ---
 欢迎使用 [Hexo](https://hexo.io/)！这是你的第一篇文章。如需了解更多信息，请查看 [官方文档](https://hexo.io/docs/)。如果在使用 Hexo 过程中遇到任何问题，可以在 [问题排查](https://hexo.io/docs/troubleshooting.html) 中寻找答案，或在 [GitHub](https://github.com/hexojs/hexo/issues) 上向我们提问。
 

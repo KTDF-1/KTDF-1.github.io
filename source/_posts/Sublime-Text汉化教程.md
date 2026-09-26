@@ -3,9 +3,8 @@ title: Sublime Text汉化教程
 author: K头的扉
 index_img: /img/汉化.png
 date: 2025-08-05 12:16:24
-tags:
-	-Sublime Text
-	-教程
+tags: [Sublime Text, 教程]
+sticky: 4
 ---
 
 # 将Sublime Text汉化

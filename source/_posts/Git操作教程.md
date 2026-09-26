@@ -3,18 +3,15 @@ title: Git 操作教程
 author: K头的扉
 index_img: /img/git.jpg
 date: 2025-08-05 12:10:25
-tags:
-	-教程
-	-Git
+tags: [教程, Git]
 categories: 技术教程        # 分类
 toc: true                   # 开启目录
 comments: true              # 开启评论
 math: true                  # 开启数学公式
+sticky: 10
 ---
 
 # Git 操作教程
-
-PS:（目前仅有在本地使用Git的教程，2025.08.05）
 
 <!-- more --> 
 
